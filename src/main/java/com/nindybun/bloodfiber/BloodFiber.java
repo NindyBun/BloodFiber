@@ -1,5 +1,9 @@
 package com.nindybun.bloodfiber;
 
+import com.nindybun.bloodfiber.data.Generator;
+import com.nindybun.bloodfiber.registries.ModBlocks;
+import com.nindybun.bloodfiber.registries.ModCreativeTabs;
+import com.nindybun.bloodfiber.registries.ModItems;
 import org.slf4j.Logger;
 
 import com.mojang.logging.LogUtils;
@@ -44,6 +48,10 @@ public class BloodFiber
     public BloodFiber(IEventBus modEventBus, ModContainer modContainer)
     {
         modEventBus.addListener(this::commonSetup);
+        ModBlocks.register(modEventBus);
+        ModItems.register(modEventBus);
+        ModCreativeTabs.register(modEventBus);
+        modEventBus.addListener(Generator::gatherData);
         NeoForge.EVENT_BUS.register(this);
 
     }
