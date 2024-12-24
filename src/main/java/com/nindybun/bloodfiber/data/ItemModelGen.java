@@ -23,18 +23,24 @@ public class ItemModelGen extends ItemModelProvider {
     protected void registerModels() {
         registerBasicBlock(ModBlocks.BLOOD_FIBER_ORE);
         registerBasicBlock(ModBlocks.BLOOD_FIBER_ORE_DEEPSLATE);
+
         registerBasicItem(ModItems.BLOOD_FIBER);
         registerBasicItem(ModItems.BLOOD_FIBER_WOVEN);
 
+        registerBasicItem(ModItems.BLOOD_FIBER_BOOTS);
+        registerBasicItem(ModItems.BLOOD_FIBER_LEGINGS);
+        registerBasicItem(ModItems.BLOOD_FIBER_CHESTPIECE);
+        registerBasicItem(ModItems.BLOOD_FIBER_HEADPIECE);
+
     }
 
-    private void registerBasicItem(Supplier<Item> item) {
-        String path = ((DeferredHolder<Item, ?>)item).getId().getPath();
+    private void registerBasicItem(Supplier<?> item) {
+        String path = ((DeferredHolder<?, ?>)item).getId().getPath();
         singleTexture(path, mcLoc("item/handheld"), "layer0", ResourceLocation.fromNamespaceAndPath(BloodFiber.MODID, "item/"+path));
     }
 
-    private void registerBasicBlock(Supplier<Block> block) {
-        String path = ((DeferredHolder<Block, ?>)block).getId().getPath();
+    private void registerBasicBlock(Supplier<?> block) {
+        String path = ((DeferredHolder<?, ?>)block).getId().getPath();
         getBuilder(path).parent(new ModelFile.UncheckedModelFile(ResourceLocation.fromNamespaceAndPath(BloodFiber.MODID, "block/"+path)));
     }
 }

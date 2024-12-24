@@ -19,5 +19,10 @@ public class LangGen extends LanguageProvider {
         add(ModItems.BLOOD_FIBER_WOVEN.get(), "Woven Blood Fiber");
         add(ModBlocks.BLOOD_FIBER_ORE.get(), "Blood Fiber Ore");
         add(ModBlocks.BLOOD_FIBER_ORE_DEEPSLATE.get(), "Deepslate Blood Fiber Ore");
+
+        add(ModItems.BLOOD_FIBER_BOOTS.get(), "Blood Woven Boots");
+        add(ModItems.BLOOD_FIBER_LEGINGS.get(), "Blood Woven Leggings");
+        add(ModItems.BLOOD_FIBER_CHESTPIECE.get(), "Blood Woven Chestpiece");
+        add(ModItems.BLOOD_FIBER_HEADPIECE.get(), "Blood Woven Headpiece");
     }
 }
