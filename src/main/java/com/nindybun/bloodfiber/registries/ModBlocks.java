@@ -28,7 +28,7 @@ public class ModBlocks {
     );
 
     public static final Supplier<Block> BLOOD_FIBER_ORE_DEEPSLATE = BLOCKS.register("blood_fiber_ore_deepslate",
-            () -> new DropExperienceBlock(UniformInt.of(0, 2), BlockBehaviour.Properties.ofLegacyCopy(BLOOD_FIBER_ORE.get())
+            () -> new DropExperienceBlock(UniformInt.of(0, 2), BlockBehaviour.Properties.ofFullCopy(BLOOD_FIBER_ORE.get())
                     .mapColor(MapColor.DEEPSLATE)
                     .strength(4.5F, 3.0F)
                     .requiresCorrectToolForDrops()

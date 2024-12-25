@@ -1,9 +1,13 @@
 package com.nindybun.bloodfiber;
 
 import com.nindybun.bloodfiber.data.Generator;
+import com.nindybun.bloodfiber.items.BloodFiberDevice;
 import com.nindybun.bloodfiber.registries.ModBlocks;
+import com.nindybun.bloodfiber.registries.ModComponents;
 import com.nindybun.bloodfiber.registries.ModCreativeTabs;
 import com.nindybun.bloodfiber.registries.ModItems;
+import net.minecraft.client.renderer.item.ItemProperties;
+import net.minecraft.resources.ResourceLocation;
 import org.slf4j.Logger;
 
 import com.mojang.logging.LogUtils;
@@ -48,6 +52,7 @@ public class BloodFiber
     public BloodFiber(IEventBus modEventBus, ModContainer modContainer)
     {
         modEventBus.addListener(this::commonSetup);
+        ModComponents.register(modEventBus);
         ModBlocks.register(modEventBus);
         ModItems.register(modEventBus);
         ModCreativeTabs.register(modEventBus);
@@ -66,11 +71,18 @@ public class BloodFiber
     }
 
     @EventBusSubscriber(modid = MODID, bus = EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
-    public static class ClientModEvents
-    {
+    public static class ClientEvents{
+
         @SubscribeEvent
-        public static void onClientSetup(FMLClientSetupEvent event)
+        public static void clientSetup(FMLClientSetupEvent event)
         {
+            event.enqueueWork(() -> {
+                ItemProperties.register(ModItems.BLOOD_FIBER_DEVICE.get(), ResourceLocation.fromNamespaceAndPath(BloodFiber.MODID, "tool"), BloodFiberDevice::getToolMode);
+                ItemProperties.register(ModItems.BLOOD_FIBER_DEVICE.get(), ResourceLocation.fromNamespaceAndPath(BloodFiber.MODID, "pulling"), BloodFiberDevice::getPulling);
+                ItemProperties.register(ModItems.BLOOD_FIBER_DEVICE.get(), ResourceLocation.fromNamespaceAndPath(BloodFiber.MODID, "pull"), BloodFiberDevice::getPull);
+            });
         }
     }
+
+
 }

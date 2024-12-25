@@ -24,5 +24,7 @@ public class LangGen extends LanguageProvider {
         add(ModItems.BLOOD_FIBER_LEGINGS.get(), "Blood Woven Leggings");
         add(ModItems.BLOOD_FIBER_CHESTPIECE.get(), "Blood Woven Chestpiece");
         add(ModItems.BLOOD_FIBER_HEADPIECE.get(), "Blood Woven Headpiece");
+
+        add(ModItems.BLOOD_FIBER_DEVICE.get(), "Blood Fiber Device (BFD)");
     }
 }

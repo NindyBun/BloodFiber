@@ -1,6 +1,7 @@
 package com.nindybun.bloodfiber.registries;
 
 import com.nindybun.bloodfiber.BloodFiber;
+import com.nindybun.bloodfiber.items.BloodFiberDevice;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.world.item.ArmorItem;
 import net.minecraft.world.item.BlockItem;
@@ -45,6 +46,9 @@ public class ModItems {
     public static final Supplier<ArmorItem> BLOOD_FIBER_HEADPIECE = ITEMS.register("blood_fiber_headpiece",
             () -> new ArmorItem(ModArmorMaterials.BLOOD_FIBER_ARMOR_MATERIAL, ArmorItem.Type.HELMET,
                     new Item.Properties().durability(ArmorItem.Type.HELMET.getDurability(5))));
+
+    public static final Supplier<BloodFiberDevice> BLOOD_FIBER_DEVICE = ITEMS.register("blood_fiber_device",
+            BloodFiberDevice::new);
 
     public static void register(IEventBus bus) {
         ITEMS.register(bus);

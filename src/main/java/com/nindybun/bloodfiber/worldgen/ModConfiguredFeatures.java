@@ -32,7 +32,7 @@ public class ModConfiguredFeatures {
                 OreConfiguration.target(deepSlateReplaceables, ModBlocks.BLOOD_FIBER_ORE_DEEPSLATE.get().defaultBlockState())
         );
 
-        register(context, BLOOD_FIBER_ORE_KEY, Feature.ORE, new OreConfiguration(blood_fiber_ores, 9));
+        register(context, BLOOD_FIBER_ORE_KEY, Feature.ORE, new OreConfiguration(blood_fiber_ores, 5));
     }
 
     private static ResourceKey<ConfiguredFeature<?, ?>> registerKey(String name) {
