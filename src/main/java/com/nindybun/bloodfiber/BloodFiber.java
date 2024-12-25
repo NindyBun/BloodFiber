@@ -2,11 +2,13 @@ package com.nindybun.bloodfiber;
 
 import com.nindybun.bloodfiber.data.Generator;
 import com.nindybun.bloodfiber.items.BloodFiberDevice;
+import com.nindybun.bloodfiber.network.PacketHandler;
 import com.nindybun.bloodfiber.registries.ModBlocks;
 import com.nindybun.bloodfiber.registries.ModComponents;
 import com.nindybun.bloodfiber.registries.ModCreativeTabs;
 import com.nindybun.bloodfiber.registries.ModItems;
 import net.minecraft.client.renderer.item.ItemProperties;
+import net.minecraft.core.Cursor3D;
 import net.minecraft.resources.ResourceLocation;
 import org.slf4j.Logger;
 
@@ -58,6 +60,7 @@ public class BloodFiber
         ModCreativeTabs.register(modEventBus);
         modEventBus.addListener(Generator::gatherData);
         NeoForge.EVENT_BUS.register(this);
+        modEventBus.addListener(PacketHandler::register);
 
     }
 

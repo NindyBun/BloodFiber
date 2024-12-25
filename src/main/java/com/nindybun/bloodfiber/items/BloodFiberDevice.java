@@ -33,9 +33,6 @@ public class BloodFiberDevice extends BowItem {
 
     @Override
     public boolean onEntitySwing(ItemStack stack, LivingEntity entity, InteractionHand hand) {
-        ToolRecord currentRecord = stack.get(ModComponents.TOOL_RECORD.get());
-        ToolRecord newRecord = ToolRecord.increment(currentRecord);
-        stack.set(ModComponents.TOOL_RECORD.get(), newRecord);
         return super.onEntitySwing(stack, entity, hand);
     }
 

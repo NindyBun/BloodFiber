@@ -14,6 +14,8 @@ public class LangGen extends LanguageProvider {
     @Override
     protected void addTranslations() {
         add("itemGroup."+BloodFiber.MODID+".creativeTab", "Blood Fiber");
+        add("key.categories."+BloodFiber.MODID, "Blood Fiber");
+        add("key."+BloodFiber.MODID+".device_radial_menu_key", "Open Tools");
 
         add(ModItems.BLOOD_FIBER.get(), "Blood Fiber");
         add(ModItems.BLOOD_FIBER_WOVEN.get(), "Woven Blood Fiber");
