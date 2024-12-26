@@ -62,7 +62,8 @@ public class AttributeEvents {
         PICKAXE("pickaxe"),
         AXE("axe"),
         SHOVEL("shovel"),
-        HOE("hoe")
+        HOE("hoe"),
+        SHEARS("shears")
         ;
 
         Property(String name) {}
@@ -71,6 +72,8 @@ public class AttributeEvents {
     public static Tool createToolProperties(Property property) {
         if (property.equals(Property.SWORD)) {
             return new Tool(List.of(Tool.Rule.minesAndDrops(List.of(Blocks.COBWEB), 15.0F), Tool.Rule.overrideSpeed(BlockTags.SWORD_EFFICIENT, 1.5F)), 1.0F, 2);
+        } else if (property.equals(Property.SHEARS)) {
+            return new Tool(List.of(Tool.Rule.minesAndDrops(List.of(Blocks.COBWEB), 15.0F), Tool.Rule.overrideSpeed(BlockTags.LEAVES, 15.0F), Tool.Rule.overrideSpeed(BlockTags.WOOL, 5.0F), Tool.Rule.overrideSpeed(List.of(Blocks.VINE, Blocks.GLOW_LICHEN), 2.0F)), 1.0F, 1);
         }
         return null;
     }

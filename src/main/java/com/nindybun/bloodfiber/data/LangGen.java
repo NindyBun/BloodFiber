@@ -36,6 +36,7 @@ public class LangGen extends LanguageProvider {
         add(ToolRecord.SHOVEL.display_name(), "Blood Fiber Device (SHOVEL)");
         add(ToolRecord.AXE.display_name(), "Blood Fiber Device (AXE)");
         add(ToolRecord.HOE.display_name(), "Blood Fiber Device (HOE)");
+        add(ToolRecord.SHEARS.display_name(), "Blood Fiber Device SHEARS)");
 
 
         add(ModItems.BLOOD_ARROW_ITEM.get(), "Blood Arrow");

@@ -51,6 +51,8 @@ public class SetDeviceTool {
                 stack.set(DataComponents.TOOL, AttributeEvents.createToolProperties(AttributeEvents.Property.AXE, Tiers.IRON, BlockTags.MINEABLE_WITH_AXE));
             } else if (record.equals(ToolRecord.HOE)) {
                 stack.set(DataComponents.TOOL, AttributeEvents.createToolProperties(AttributeEvents.Property.HOE, Tiers.IRON, BlockTags.MINEABLE_WITH_HOE));
+            } else if (record.equals(ToolRecord.SHEARS)) {
+                stack.set(DataComponents.TOOL, AttributeEvents.createToolProperties(AttributeEvents.Property.SHEARS));
             }
 
             player.level()

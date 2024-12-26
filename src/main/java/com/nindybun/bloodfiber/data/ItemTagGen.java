@@ -36,7 +36,8 @@ public class ItemTagGen extends ItemTagsProvider {
         tag(ItemTags.HOES)
                 .add(ModItems.BLOOD_FIBER_DEVICE.get());
 
-
+        tag(Tags.Items.TOOLS_SHEAR)
+                .add(ModItems.BLOOD_FIBER_DEVICE.get());
         tag(Tags.Items.MELEE_WEAPON_TOOLS)
                 .add(ModItems.BLOOD_FIBER_DEVICE.get());
         tag(Tags.Items.TOOLS_BOW)

@@ -63,8 +63,14 @@ public class BloodFiberDevice extends BowItem {
             return ItemAbilities.DEFAULT_SWORD_ACTIONS.contains(itemAbility);
         } else if (record.equals(ToolRecord.PICKAXE)) {
             return ItemAbilities.DEFAULT_PICKAXE_ACTIONS.contains(itemAbility);
+        } else if (record.equals(ToolRecord.SHOVEL)) {
+            return ItemAbilities.DEFAULT_SHOVEL_ACTIONS.contains(itemAbility);
         } else if (record.equals(ToolRecord.AXE)) {
             return ItemAbilities.DEFAULT_AXE_ACTIONS.contains(itemAbility);
+        } else if (record.equals(ToolRecord.HOE)) {
+            return ItemAbilities.DEFAULT_HOE_ACTIONS.contains(itemAbility);
+        } else if (record.equals(ToolRecord.SHEARS)) {
+            return ItemAbilities.DEFAULT_SHEARS_ACTIONS.contains(itemAbility);
         }
 
         return false;

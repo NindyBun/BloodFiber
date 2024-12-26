@@ -83,6 +83,9 @@ public class DeviceRadialMenu extends Screen {
         s = new ItemStack(ModItems.BLOOD_FIBER_DEVICE.get());
         s.set(ModComponents.TOOL_RECORD.get(), ToolRecord.HOE);
         tools.add(s);
+        s = new ItemStack(ModItems.BLOOD_FIBER_DEVICE.get());
+        s.set(ModComponents.TOOL_RECORD.get(), ToolRecord.SHEARS);
+        tools.add(s);
         this.stack = stack;
         this.player = player;
     }
@@ -94,7 +97,7 @@ public class DeviceRadialMenu extends Screen {
         if (numberOfSlices == 0)
             return;
 
-        float radiusIn = 20;
+        float radiusIn = 30;
         float radiusOut = radiusIn * 2;
         int x = width / 2;
         int y = height / 2;
@@ -239,7 +242,6 @@ public class DeviceRadialMenu extends Screen {
     private void processClick() {
         if (selected != -1) {
             PacketDistributor.sendToServer(new SetDeviceTool.Data(this.tools.get(this.selected).get(ModComponents.TOOL_RECORD.get())));
-
         }
         onClose();
     }

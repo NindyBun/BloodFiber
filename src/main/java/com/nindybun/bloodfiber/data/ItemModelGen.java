@@ -103,6 +103,10 @@ public class ItemModelGen extends ItemModelProvider {
                     .model(withExistingParent(path+"_hoe", mcLoc("item/handheld"))
                             .texture("layer0", ResourceLocation.fromNamespaceAndPath(BloodFiber.MODID, "item/"+path+"_hoe"))
                     ).end()
+                .override().predicate(ResourceLocation.fromNamespaceAndPath(BloodFiber.MODID, "tool"), 0.7f)
+                    .model(withExistingParent(path+"_shears", mcLoc("item/handheld"))
+                            .texture("layer0", ResourceLocation.fromNamespaceAndPath(BloodFiber.MODID, "item/"+path+"_shears"))
+                    ).end()
         ;
 
     }

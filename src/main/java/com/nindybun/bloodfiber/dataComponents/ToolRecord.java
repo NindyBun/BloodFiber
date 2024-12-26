@@ -16,6 +16,7 @@ public record ToolRecord(String mode, float id, String display_name) {
     public static final ToolRecord SHOVEL = new ToolRecord("shovel", 0.4f, "item." + BloodFiber.MODID+".shovel");
     public static final ToolRecord AXE = new ToolRecord("axe", 0.5f, "item." + BloodFiber.MODID+".axe");
     public static final ToolRecord HOE = new ToolRecord("hoe", 0.6f, "item." + BloodFiber.MODID+".hoe");
+    public static final ToolRecord SHEARS = new ToolRecord("shears", 0.7f, "item." + BloodFiber.MODID+".shears");
 
     public static final Codec<ToolRecord> CODEC = RecordCodecBuilder.create(instance ->
             instance.group(
@@ -40,11 +41,12 @@ public record ToolRecord(String mode, float id, String display_name) {
             case 4 -> SHOVEL;
             case 5 -> AXE;
             case 6 -> HOE;
+            case 7 -> SHEARS;
             default -> BLANK;
         };
     }
 
     public static ToolRecord increment(ToolRecord record) {
-        return ToolRecord.getRecord((record.id()+0.1f) % 0.7f);
+        return ToolRecord.getRecord((record.id()+0.1f) % 0.8f);
     }
 }
