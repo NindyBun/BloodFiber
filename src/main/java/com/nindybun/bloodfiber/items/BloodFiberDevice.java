@@ -61,6 +61,10 @@ public class BloodFiberDevice extends BowItem {
 
         if (record.equals(ToolRecord.SWORD)) {
             return ItemAbilities.DEFAULT_SWORD_ACTIONS.contains(itemAbility);
+        } else if (record.equals(ToolRecord.PICKAXE)) {
+            return ItemAbilities.DEFAULT_PICKAXE_ACTIONS.contains(itemAbility);
+        } else if (record.equals(ToolRecord.AXE)) {
+            return ItemAbilities.DEFAULT_AXE_ACTIONS.contains(itemAbility);
         }
 
         return false;

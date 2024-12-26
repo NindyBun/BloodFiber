@@ -23,10 +23,14 @@ import net.minecraft.client.gui.narration.NarratableEntry;
 import net.minecraft.client.gui.navigation.FocusNavigationEvent;
 import net.minecraft.client.gui.navigation.ScreenDirection;
 import net.minecraft.client.gui.screens.Screen;
+import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.renderer.GameRenderer;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.network.chat.Component;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -235,8 +239,8 @@ public class DeviceRadialMenu extends Screen {
     private void processClick() {
         if (selected != -1) {
             PacketDistributor.sendToServer(new SetDeviceTool.Data(this.tools.get(this.selected).get(ModComponents.TOOL_RECORD.get())));
+
         }
-        stack.getAttributeModifiers();
         onClose();
     }
 

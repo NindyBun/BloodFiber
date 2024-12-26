@@ -2,6 +2,7 @@ package com.nindybun.bloodfiber.network.packets;
 
 import com.nindybun.bloodfiber.BloodFiber;
 import com.nindybun.bloodfiber.dataComponents.ToolRecord;
+import com.nindybun.bloodfiber.events.server.AttributeEvents;
 import com.nindybun.bloodfiber.items.BloodFiberDevice;
 import com.nindybun.bloodfiber.registries.ModComponents;
 import com.nindybun.bloodfiber.tools.Helpers;
@@ -12,10 +13,11 @@ import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundSource;
+import net.minecraft.tags.BlockTags;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.SwordItem;
-import net.minecraft.world.item.Tiers;
+import net.minecraft.world.item.*;
 import net.neoforged.neoforge.network.PacketDistributor;
 import net.neoforged.neoforge.network.handling.IPayloadContext;
 
@@ -40,8 +42,21 @@ public class SetDeviceTool {
             }
 
             if (record.equals(ToolRecord.SWORD)) {
-                stack.set(DataComponents.TOOL, SwordItem.createToolProperties());
+                stack.set(DataComponents.TOOL, AttributeEvents.createToolProperties(AttributeEvents.Property.SWORD));
+            } else if (record.equals(ToolRecord.PICKAXE)) {
+                stack.set(DataComponents.TOOL, AttributeEvents.createToolProperties(AttributeEvents.Property.PICKAXE, Tiers.IRON, BlockTags.MINEABLE_WITH_PICKAXE));
+            } else if (record.equals(ToolRecord.SHOVEL)) {
+                stack.set(DataComponents.TOOL, AttributeEvents.createToolProperties(AttributeEvents.Property.SHOVEL, Tiers.IRON, BlockTags.MINEABLE_WITH_SHOVEL));
+            } else if (record.equals(ToolRecord.AXE)) {
+                stack.set(DataComponents.TOOL, AttributeEvents.createToolProperties(AttributeEvents.Property.AXE, Tiers.IRON, BlockTags.MINEABLE_WITH_AXE));
+            } else if (record.equals(ToolRecord.HOE)) {
+                stack.set(DataComponents.TOOL, AttributeEvents.createToolProperties(AttributeEvents.Property.HOE, Tiers.IRON, BlockTags.MINEABLE_WITH_HOE));
             }
+
+            player.level()
+                    .playSound(
+                            null, player.getX(), player.getY(), player.getZ(), SoundEvents.COBWEB_HIT, SoundSource.PLAYERS, 1.0F, 0.35F / (player.level().getRandom().nextFloat() * 0.4F + 1.2F) + 1 * 0.5F
+                    );
         });
     }
 

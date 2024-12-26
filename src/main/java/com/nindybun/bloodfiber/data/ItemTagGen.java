@@ -23,5 +23,25 @@ public class ItemTagGen extends ItemTagsProvider {
     protected void addTags(HolderLookup.Provider provider) {
         tag(ItemTags.ARROWS)
                 .add(ModItems.BLOOD_ARROW_ITEM.get());
+        tag(ItemTags.SWORDS)
+                .add(ModItems.BLOOD_FIBER_DEVICE.get());
+        tag(ItemTags.SHOVELS)
+                .add(ModItems.BLOOD_FIBER_DEVICE.get());
+        tag(ItemTags.PICKAXES)
+                .add(ModItems.BLOOD_FIBER_DEVICE.get());
+        tag(ItemTags.CLUSTER_MAX_HARVESTABLES)
+                .add(ModItems.BLOOD_FIBER_DEVICE.get());
+        tag(ItemTags.AXES)
+                .add(ModItems.BLOOD_FIBER_DEVICE.get());
+        tag(ItemTags.HOES)
+                .add(ModItems.BLOOD_FIBER_DEVICE.get());
+
+
+        tag(Tags.Items.MELEE_WEAPON_TOOLS)
+                .add(ModItems.BLOOD_FIBER_DEVICE.get());
+        tag(Tags.Items.TOOLS_BOW)
+                .add(ModItems.BLOOD_FIBER_DEVICE.get());
+        tag(Tags.Items.MINING_TOOL_TOOLS)
+                .add(ModItems.BLOOD_FIBER_DEVICE.get());
     }
 }
