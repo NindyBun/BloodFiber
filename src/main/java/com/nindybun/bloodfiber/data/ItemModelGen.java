@@ -33,6 +33,8 @@ public class ItemModelGen extends ItemModelProvider {
         registerBasicItem(ModItems.BLOOD_FIBER_CHESTPIECE);
         registerBasicItem(ModItems.BLOOD_FIBER_HEADPIECE);
 
+        registerBasicItem(ModItems.BLOOD_ARROW_ITEM);
+
         String path = "blood_fiber";
         String device_path = ((DeferredHolder<?, ?>)ModItems.BLOOD_FIBER_DEVICE).getId().getPath();
         String bow_path = path+"_bow";

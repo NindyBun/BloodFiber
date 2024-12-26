@@ -20,7 +20,7 @@ public class ClientOpenDeviceRadialMenu {
 
     public void handle(Data data, final IPayloadContext context) {
         context.enqueueWork(() -> {
-            Minecraft.getInstance().setScreen(new DeviceRadialMenu(data.stack()));
+            Minecraft.getInstance().setScreen(new DeviceRadialMenu(data.stack(), context.player()));
         });
     }
 

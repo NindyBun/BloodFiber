@@ -4,6 +4,9 @@ import net.minecraft.core.HolderLookup;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.loot.LootTableProvider;
+import net.minecraft.data.tags.TagsProvider;
+import net.minecraft.data.tags.VanillaBlockTagsProvider;
+import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParamSets;
 import net.neoforged.neoforge.common.data.ExistingFileHelper;
 import net.neoforged.neoforge.data.event.GatherDataEvent;
@@ -28,7 +31,10 @@ public class Generator {
         generator.addProvider(event.includeServer(), new BlockStateGen(output, helper));
         generator.addProvider(event.includeServer(), new LootTableProvider(output, Collections.emptySet(),
                 List.of(new LootTableProvider.SubProviderEntry(BlockLootGen::new, LootContextParamSets.BLOCK)), provider));
-        generator.addProvider(event.includeServer(), new BlockTagGen(output, provider, helper));
+
+        BlockTagGen blockTagGen = new BlockTagGen(output, provider, helper);
+        generator.addProvider(event.includeServer(), blockTagGen);
+        generator.addProvider(event.includeServer(), new ItemTagGen(output, provider, blockTagGen.contentsGetter(), helper));
         generator.addProvider(event.includeServer(), new RecipeGen(output, provider));
 
     }

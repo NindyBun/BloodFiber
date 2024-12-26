@@ -1,6 +1,7 @@
 package com.nindybun.bloodfiber.data;
 
 import com.nindybun.bloodfiber.BloodFiber;
+import com.nindybun.bloodfiber.dataComponents.ToolRecord;
 import com.nindybun.bloodfiber.registries.ModBlocks;
 import com.nindybun.bloodfiber.registries.ModItems;
 import net.minecraft.data.PackOutput;
@@ -27,6 +28,16 @@ public class LangGen extends LanguageProvider {
         add(ModItems.BLOOD_FIBER_CHESTPIECE.get(), "Blood Woven Chestpiece");
         add(ModItems.BLOOD_FIBER_HEADPIECE.get(), "Blood Woven Headpiece");
 
-        add(ModItems.BLOOD_FIBER_DEVICE.get(), "Blood Fiber Device (BFD)");
+        add(ModItems.BLOOD_FIBER_DEVICE.get(), "Blood Fiber Device");
+        add(ToolRecord.BLANK.display_name(), "Blood Fiber Device");
+        add(ToolRecord.BOW.display_name(), "Blood Fiber Device (BOW)");
+        add(ToolRecord.SWORD.display_name(), "Blood Fiber Device (SWORD)");
+        add(ToolRecord.PICKAXE.display_name(), "Blood Fiber Device (PICKAXE)");
+        add(ToolRecord.SHOVEL.display_name(), "Blood Fiber Device (SHOVEL)");
+        add(ToolRecord.AXE.display_name(), "Blood Fiber Device (AXE)");
+        add(ToolRecord.HOE.display_name(), "Blood Fiber Device (HOE)");
+
+
+        add(ModItems.BLOOD_ARROW_ITEM.get(), "Blood Arrow");
     }
 }

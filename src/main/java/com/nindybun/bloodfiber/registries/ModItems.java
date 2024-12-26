@@ -1,6 +1,7 @@
 package com.nindybun.bloodfiber.registries;
 
 import com.nindybun.bloodfiber.BloodFiber;
+import com.nindybun.bloodfiber.items.BloodArrowItem;
 import com.nindybun.bloodfiber.items.BloodFiberDevice;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.world.item.ArmorItem;
@@ -49,6 +50,9 @@ public class ModItems {
 
     public static final Supplier<BloodFiberDevice> BLOOD_FIBER_DEVICE = ITEMS.register("blood_fiber_device",
             BloodFiberDevice::new);
+
+    public static final Supplier<BloodArrowItem> BLOOD_ARROW_ITEM = ITEMS.register("blood_fiber_arrow",
+            BloodArrowItem::new);
 
     public static void register(IEventBus bus) {
         ITEMS.register(bus);

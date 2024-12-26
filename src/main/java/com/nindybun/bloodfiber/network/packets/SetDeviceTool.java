@@ -5,6 +5,7 @@ import com.nindybun.bloodfiber.dataComponents.ToolRecord;
 import com.nindybun.bloodfiber.items.BloodFiberDevice;
 import com.nindybun.bloodfiber.registries.ModComponents;
 import com.nindybun.bloodfiber.tools.Helpers;
+import net.minecraft.core.component.DataComponents;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
@@ -13,6 +14,8 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.SwordItem;
+import net.minecraft.world.item.Tiers;
 import net.neoforged.neoforge.network.PacketDistributor;
 import net.neoforged.neoforge.network.handling.IPayloadContext;
 
@@ -29,6 +32,16 @@ public class SetDeviceTool {
             if (!Helpers.isHoldingItem(BloodFiberDevice.class, player)) return;
             ItemStack stack = Helpers.getItem(BloodFiberDevice.class, player);
             stack.set(ModComponents.TOOL_RECORD.get(), data.record);
+
+            ToolRecord record = stack.get(ModComponents.TOOL_RECORD.get());
+
+            if (stack.has(DataComponents.TOOL)) {
+                stack.remove(DataComponents.TOOL);
+            }
+
+            if (record.equals(ToolRecord.SWORD)) {
+                stack.set(DataComponents.TOOL, SwordItem.createToolProperties());
+            }
         });
     }
 

@@ -55,8 +55,9 @@ public class DeviceRadialMenu extends Screen {
     private int selected = -1;
     private List<ItemStack> tools = new ArrayList<>();
     private final ItemStack stack;
+    private final Player player;
 
-    public DeviceRadialMenu(ItemStack stack) {
+    public DeviceRadialMenu(ItemStack stack, Player player) {
         super(Component.literal("Title"));
         ItemStack s = new ItemStack(ModItems.BLOOD_FIBER_DEVICE.get());
         tools.add(s);
@@ -79,6 +80,7 @@ public class DeviceRadialMenu extends Screen {
         s.set(ModComponents.TOOL_RECORD.get(), ToolRecord.HOE);
         tools.add(s);
         this.stack = stack;
+        this.player = player;
     }
 
     @Override
@@ -117,7 +119,7 @@ public class DeviceRadialMenu extends Screen {
             float midX = x - itemRadius * (float) Math.cos(middle);
             float midY = y - itemRadius * (float) Math.sin(middle);
             if (selected == j)
-                guiGraphics.renderTooltip(Minecraft.getInstance().font, stack, (int)midX, (int)midY);
+                guiGraphics.renderTooltip(Minecraft.getInstance().font, tools.get(j), (int)midX, (int)midY);
         }
     }
 
@@ -231,7 +233,10 @@ public class DeviceRadialMenu extends Screen {
     }
 
     private void processClick() {
-        if (selected != -1) PacketDistributor.sendToServer(new SetDeviceTool.Data(this.tools.get(this.selected).get(ModComponents.TOOL_RECORD.get())));
+        if (selected != -1) {
+            PacketDistributor.sendToServer(new SetDeviceTool.Data(this.tools.get(this.selected).get(ModComponents.TOOL_RECORD.get())));
+        }
+        stack.getAttributeModifiers();
         onClose();
     }
 
