@@ -17,6 +17,8 @@ public class ModComponents {
        builder.persistent(ToolRecord.CODEC).networkSynchronized(ToolRecord.STREAM_CODEC)
     );
 
+
+
     public static void register(IEventBus bus) {
         COMPONENTS.register(bus);
     }

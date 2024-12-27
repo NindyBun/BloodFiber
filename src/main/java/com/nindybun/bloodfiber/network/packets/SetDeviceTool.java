@@ -22,6 +22,7 @@ import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.*;
+import net.neoforged.neoforge.common.NeoForgeMod;
 import net.neoforged.neoforge.common.util.AttributeUtil;
 import net.neoforged.neoforge.event.entity.EntityAttributeModificationEvent;
 import net.neoforged.neoforge.network.PacketDistributor;
@@ -52,6 +53,7 @@ public class SetDeviceTool {
                 //AttributeEvents.addOrPersistModifier(AttributeEvents.AttributeModifiers.ARMOR, 1, player, Attributes.ARMOR);
                 //AttributeEvents.addOrPersistModifier(AttributeEvents.AttributeModifiers.ARMOR_TOUGHNESS, 1, player, Attributes.ARMOR_TOUGHNESS);
                 //AttributeEvents.addOrPersistModifier(AttributeEvents.AttributeModifiers.MOVEMENT_SPEED, 0.02, player, Attributes.MOVEMENT_SPEED);
+                //player.getAttribute(NeoForgeMod.CREATIVE_FLIGHT).setBaseValue(1);
             } else if (record.equals(ToolRecord.SWORD)) {
                 stack.set(DataComponents.TOOL, AttributeEvents.createToolProperties(AttributeEvents.Property.SWORD));
             } else if (record.equals(ToolRecord.PICKAXE)) {
