@@ -16,8 +16,14 @@ import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.tags.BlockTags;
+import net.minecraft.world.effect.MobEffectInstance;
+import net.minecraft.world.effect.MobEffects;
+import net.minecraft.world.entity.ai.attributes.AttributeModifier;
+import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.*;
+import net.neoforged.neoforge.common.util.AttributeUtil;
+import net.neoforged.neoforge.event.entity.EntityAttributeModificationEvent;
 import net.neoforged.neoforge.network.PacketDistributor;
 import net.neoforged.neoforge.network.handling.IPayloadContext;
 
@@ -41,7 +47,12 @@ public class SetDeviceTool {
                 stack.remove(DataComponents.TOOL);
             }
 
-            if (record.equals(ToolRecord.SWORD)) {
+            if (record.equals(ToolRecord.BLANK)) {
+                //AttributeEvents.addOrPersistModifier(AttributeEvents.AttributeModifiers.MAX_HEALTH, 1, player, Attributes.MAX_HEALTH);
+                //AttributeEvents.addOrPersistModifier(AttributeEvents.AttributeModifiers.ARMOR, 1, player, Attributes.ARMOR);
+                //AttributeEvents.addOrPersistModifier(AttributeEvents.AttributeModifiers.ARMOR_TOUGHNESS, 1, player, Attributes.ARMOR_TOUGHNESS);
+                //AttributeEvents.addOrPersistModifier(AttributeEvents.AttributeModifiers.MOVEMENT_SPEED, 0.02, player, Attributes.MOVEMENT_SPEED);
+            } else if (record.equals(ToolRecord.SWORD)) {
                 stack.set(DataComponents.TOOL, AttributeEvents.createToolProperties(AttributeEvents.Property.SWORD));
             } else if (record.equals(ToolRecord.PICKAXE)) {
                 stack.set(DataComponents.TOOL, AttributeEvents.createToolProperties(AttributeEvents.Property.PICKAXE, Tiers.IRON, BlockTags.MINEABLE_WITH_PICKAXE));

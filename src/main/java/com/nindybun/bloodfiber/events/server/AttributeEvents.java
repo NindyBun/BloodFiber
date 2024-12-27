@@ -4,13 +4,17 @@ import com.nindybun.bloodfiber.BloodFiber;
 import com.nindybun.bloodfiber.dataComponents.ToolRecord;
 import com.nindybun.bloodfiber.items.BloodFiberDevice;
 import com.nindybun.bloodfiber.registries.ModComponents;
+import net.minecraft.core.Holder;
 import net.minecraft.core.component.DataComponentPatch;
 import net.minecraft.core.component.DataComponents;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.entity.EquipmentSlotGroup;
+import net.minecraft.world.entity.ai.attributes.Attribute;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.SwordItem;
 import net.minecraft.world.item.Tier;
@@ -22,7 +26,10 @@ import net.minecraft.world.level.block.Blocks;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
+import net.neoforged.neoforge.common.util.AttributeUtil;
 import net.neoforged.neoforge.event.ItemAttributeModifierEvent;
+import net.neoforged.neoforge.event.entity.EntityAttributeModificationEvent;
+import net.neoforged.neoforge.event.entity.player.PlayerEvent;
 
 import javax.annotation.Nullable;
 import java.util.List;
@@ -57,7 +64,30 @@ public class AttributeEvents {
         event.addModifier(Attributes.ATTACK_SPEED, new AttributeModifier(BASE_ATTACK_SPEED_ID, (double)atackSpeed, AttributeModifier.Operation.ADD_VALUE), EquipmentSlotGroup.MAINHAND);
     }
 
-    public static enum Property {
+    public static void addOrPersistModifier(AttributeModifiers modifier, double amount, Player player, Holder<Attribute> attribute) {
+        ResourceLocation path =ResourceLocation.fromNamespaceAndPath(BloodFiber.MODID, modifier.name);
+        AttributeModifier attributeModifier = player.getAttribute(attribute).getModifier(path);
+        double n = (attributeModifier != null ? attributeModifier.amount() : 0) + amount;
+        if (attributeModifier != null) {
+            player.getAttribute(attribute).removeModifier(path);
+        }
+        player.getAttribute(attribute).addPermanentModifier(new AttributeModifier(path, n, AttributeModifier.Operation.ADD_VALUE));
+    }
+
+    public enum AttributeModifiers {
+        MAX_HEALTH("max_health"),
+        ARMOR("armor"),
+        ARMOR_TOUGHNESS("armor_toughness"),
+        MOVEMENT_SPEED("movement_speed"),
+        ;
+
+        private final String name;
+        AttributeModifiers(String name){
+            this.name = name;
+        }
+    }
+
+    public enum Property {
         SWORD("sword"),
         PICKAXE("pickaxe"),
         AXE("axe"),
