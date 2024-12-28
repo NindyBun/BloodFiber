@@ -21,6 +21,7 @@ import net.minecraft.util.Unit;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.InteractionResultHolder;
+import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.Projectile;
@@ -41,6 +42,7 @@ import javax.tools.Tool;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 import java.util.function.Consumer;
 import java.util.function.Predicate;
 
@@ -49,7 +51,24 @@ public class BloodFiberDevice extends BowItem {
     public BloodFiberDevice() {
         super(new Properties().stacksTo(1)
                 .component(ModComponents.TOOL_RECORD.get(), ToolRecord.BLANK)
+                .component(ModComponents.PLAYER_ID.get(), "")
         );
+    }
+
+    @Override
+    public void inventoryTick(ItemStack stack, Level level, Entity entity, int slotId, boolean isSelected) {
+        Player player = entity instanceof Player ? (Player) entity : null;
+        if (player == null || !entity.isAlive()) {
+            stack.set(ModComponents.TOOL_RECORD.get(), ToolRecord.BLANK);
+            stack.set(ModComponents.PLAYER_ID.get(), "");
+        } else {
+            String p1 = player.getUUID().toString();
+            String p2 = stack.get(ModComponents.PLAYER_ID.get());
+            if (!p1.equals(p2)) {
+                stack.set(ModComponents.TOOL_RECORD.get(), ToolRecord.BLANK);
+                stack.set(ModComponents.PLAYER_ID.get(), p1);
+            }
+        }
     }
 
     @Override

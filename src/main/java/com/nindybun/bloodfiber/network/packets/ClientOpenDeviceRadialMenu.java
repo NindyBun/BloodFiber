@@ -9,7 +9,11 @@ import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
+import net.neoforged.neoforge.network.PacketDistributor;
+import net.neoforged.neoforge.network.handling.DirectionalPayloadHandler;
 import net.neoforged.neoforge.network.handling.IPayloadContext;
+import net.neoforged.neoforge.network.registration.HandlerThread;
+import net.neoforged.neoforge.network.registration.NetworkChannel;
 
 public class ClientOpenDeviceRadialMenu {
     public static final ClientOpenDeviceRadialMenu INSTANCE = new ClientOpenDeviceRadialMenu();
@@ -20,7 +24,7 @@ public class ClientOpenDeviceRadialMenu {
 
     public void handle(Data data, final IPayloadContext context) {
         context.enqueueWork(() -> {
-            Minecraft.getInstance().setScreen(new DeviceRadialMenu(data.stack(), context.player()));
+            Minecraft.getInstance().setScreen(new DeviceRadialMenu(data.stack(), Minecraft.getInstance().player));
         });
     }
 

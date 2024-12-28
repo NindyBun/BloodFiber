@@ -5,6 +5,7 @@ import com.nindybun.bloodfiber.BloodFiber;
 import com.nindybun.bloodfiber.items.BloodFiberDevice;
 import com.nindybun.bloodfiber.network.packets.ServerOpenDeviceRadialMenu;
 import com.nindybun.bloodfiber.registries.ModComponents;
+import com.nindybun.bloodfiber.screens.DeviceRadialMenu;
 import com.nindybun.bloodfiber.tools.Helpers;
 import net.minecraft.client.KeyMapping;
 import net.minecraft.client.Minecraft;
@@ -39,7 +40,8 @@ public class KeyEvents {
             if (device_keyIsDown && !device_keyWasDown) {
                 while (device_key.consumeClick() && isHoldingDevice) {
                     if (Minecraft.getInstance().screen == null) {
-                        PacketDistributor.sendToServer(new ServerOpenDeviceRadialMenu.Data(0));
+                        Minecraft.getInstance().setScreen(new DeviceRadialMenu(Helpers.getItem(BloodFiberDevice.class, player), player));
+                        //PacketDistributor.sendToServer(new ServerOpenDeviceRadialMenu.Data(0));
                     }
                 }
             }
