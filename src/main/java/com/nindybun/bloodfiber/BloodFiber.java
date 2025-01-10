@@ -5,12 +5,16 @@ import com.nindybun.bloodfiber.entities.projectiles.BloodArrow.BloodArrowRendere
 import com.nindybun.bloodfiber.items.BloodFiberDevice;
 import com.nindybun.bloodfiber.network.PacketHandler;
 import com.nindybun.bloodfiber.registries.*;
+import com.nindybun.bloodfiber.screens.DeviceBindingScreen;
+import net.minecraft.client.gui.screens.MenuScreens;
 import net.minecraft.client.renderer.GameRenderer;
 import net.minecraft.client.renderer.ItemInHandRenderer;
 import net.minecraft.client.renderer.entity.EntityRenderers;
 import net.minecraft.client.renderer.item.ItemProperties;
 import net.minecraft.core.Cursor3D;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.MenuProvider;
+import net.neoforged.neoforge.client.event.RegisterMenuScreensEvent;
 import net.neoforged.neoforge.client.event.RenderHandEvent;
 import net.neoforged.neoforge.event.entity.player.ItemTooltipEvent;
 import org.slf4j.Logger;
@@ -60,6 +64,7 @@ public class BloodFiber
         ModComponents.register(modEventBus);
         ModBlocks.register(modEventBus);
         ModItems.register(modEventBus);
+        ModMenus.register(modEventBus);
         ModEntities.register(modEventBus);
         ModCreativeTabs.register(modEventBus);
         modEventBus.addListener(Generator::gatherData);
@@ -81,9 +86,15 @@ public class BloodFiber
     public static class ClientEvents{
 
         @SubscribeEvent
+        public static void registerScreens(RegisterMenuScreensEvent event) {
+            event.register(ModMenus.DEVICE_BINDING_MENU.get(), DeviceBindingScreen::new);
+        }
+
+        @SubscribeEvent
         public static void clientSetup(FMLClientSetupEvent event)
         {
             EntityRenderers.register(ModEntities.BLOOD_ARROW.get(), BloodArrowRenderer::new);
+
             event.enqueueWork(() -> {
                 ItemProperties.register(ModItems.BLOOD_FIBER_DEVICE.get(), ResourceLocation.fromNamespaceAndPath(BloodFiber.MODID, "tool"), BloodFiberDevice::getToolMode);
                 ItemProperties.register(ModItems.BLOOD_FIBER_DEVICE.get(), ResourceLocation.fromNamespaceAndPath(BloodFiber.MODID, "pulling"), BloodFiberDevice::getPulling);

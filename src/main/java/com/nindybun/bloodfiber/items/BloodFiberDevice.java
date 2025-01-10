@@ -6,6 +6,7 @@ import com.nindybun.bloodfiber.dataComponents.ToolRecord;
 import com.nindybun.bloodfiber.entities.projectiles.BloodArrow.BloodArrow;
 import com.nindybun.bloodfiber.registries.ModComponents;
 import com.nindybun.bloodfiber.registries.ModItems;
+import com.nindybun.bloodfiber.screens.menus.DeviceBindingMenu;
 import net.minecraft.advancements.CriteriaTriggers;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.core.BlockPos;
@@ -21,6 +22,7 @@ import net.minecraft.util.Unit;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.InteractionResultHolder;
+import net.minecraft.world.SimpleMenuProvider;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
@@ -140,6 +142,15 @@ public class BloodFiberDevice extends BowItem {
     public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand hand) {
         ItemStack itemstack = player.getItemInHand(hand);
         ToolRecord currentRecord = itemstack.get(ModComponents.TOOL_RECORD.get());
+
+        if (!level.isClientSide() && currentRecord.equals(ToolRecord.BLANK) && player instanceof ServerPlayer serverPlayer && player.isCrouching()) {
+            serverPlayer.openMenu(new SimpleMenuProvider(
+                    (containerId, playerInventory, p) -> new DeviceBindingMenu(containerId, playerInventory),
+                    Component.translatable("menu.title."+BloodFiber.MODID+".device"))
+            );
+            return InteractionResultHolder.pass(itemstack);
+        }
+
         if (!currentRecord.equals(ToolRecord.BOW)) {
             return InteractionResultHolder.fail(itemstack);
         } else {

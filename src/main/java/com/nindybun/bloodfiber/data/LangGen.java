@@ -17,6 +17,9 @@ public class LangGen extends LanguageProvider {
         add("itemGroup."+BloodFiber.MODID+".creativeTab", "Blood Fiber");
         add("key.categories."+BloodFiber.MODID, "Blood Fiber");
         add("key."+BloodFiber.MODID+".device_radial_menu_key", "Open Tools");
+        add("menu.title."+BloodFiber.MODID+".device", "Blood Fiber Device");
+        add("menu.title."+BloodFiber.MODID+".device_description", "Description");
+        add("menu.title."+BloodFiber.MODID+".device_modifier", "Modifiers");
 
         add(ModItems.BLOOD_FIBER.get(), "Blood Fiber");
         add(ModItems.BLOOD_FIBER_WOVEN.get(), "Woven Blood Fiber");

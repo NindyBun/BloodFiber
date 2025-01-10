@@ -1,5 +1,5 @@
 package com.nindybun.bloodfiber.registries;
 
-public class DataAttachments {
+public class ModAttachments {
 
 }
