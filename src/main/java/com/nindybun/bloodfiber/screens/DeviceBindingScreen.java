@@ -2,7 +2,7 @@ package com.nindybun.bloodfiber.screens;
 
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.nindybun.bloodfiber.BloodFiber;
-import com.nindybun.bloodfiber.screens.menus.DeviceBindingMenu;
+import com.nindybun.bloodfiber.menus.DeviceBindingMenu;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
 import net.minecraft.network.chat.Component;

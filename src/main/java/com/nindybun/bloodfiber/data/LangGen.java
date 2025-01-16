@@ -20,6 +20,7 @@ public class LangGen extends LanguageProvider {
         add("menu.title."+BloodFiber.MODID+".device", "Blood Fiber Device");
         add("menu.title."+BloodFiber.MODID+".device_description", "Description");
         add("menu.title."+BloodFiber.MODID+".device_modifier", "Modifiers");
+        add("message."+BloodFiber.MODID+".can't_use", "Can't activate more than one device!");
 
         add(ModItems.BLOOD_FIBER.get(), "Blood Fiber");
         add(ModItems.BLOOD_FIBER_WOVEN.get(), "Woven Blood Fiber");

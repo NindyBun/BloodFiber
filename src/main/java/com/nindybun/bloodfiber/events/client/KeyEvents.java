@@ -2,6 +2,7 @@ package com.nindybun.bloodfiber.events.client;
 
 import com.mojang.blaze3d.platform.InputConstants;
 import com.nindybun.bloodfiber.BloodFiber;
+import com.nindybun.bloodfiber.dataComponents.ToolRecord;
 import com.nindybun.bloodfiber.items.BloodFiberDevice;
 import com.nindybun.bloodfiber.network.packets.ServerOpenDeviceRadialMenu;
 import com.nindybun.bloodfiber.registries.ModComponents;
@@ -9,6 +10,9 @@ import com.nindybun.bloodfiber.screens.DeviceRadialMenu;
 import com.nindybun.bloodfiber.tools.Helpers;
 import net.minecraft.client.KeyMapping;
 import net.minecraft.client.Minecraft;
+import net.minecraft.network.chat.Component;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.neoforged.api.distmarker.Dist;
@@ -30,18 +34,45 @@ public class KeyEvents {
         if (event.getStage() != RenderLevelStageEvent.Stage.AFTER_LEVEL) return;
         Player player = Minecraft.getInstance().player;
         boolean isHoldingDevice = false;
+        boolean cancel = false;
 
         if (Minecraft.getInstance().screen == null) {
             if (Helpers.isHoldingItem(BloodFiberDevice.class, player)) {
                 isHoldingDevice = true;
             }
-
+            if (!isHoldingDevice) {
+                return;
+            }
             boolean device_keyIsDown = device_key.isDown();
             if (device_keyIsDown && !device_keyWasDown) {
-                while (device_key.consumeClick() && isHoldingDevice) {
-                    if (Minecraft.getInstance().screen == null) {
-                        Minecraft.getInstance().setScreen(new DeviceRadialMenu(Helpers.getItem(BloodFiberDevice.class, player), player));
-                        //PacketDistributor.sendToServer(new ServerOpenDeviceRadialMenu.Data(0));
+
+                ItemStack offHand = player.getItemInHand(InteractionHand.OFF_HAND);
+                boolean offHandActive = offHand.getItem() instanceof BloodFiberDevice && !offHand.get(ModComponents.TOOL_RECORD).equals(ToolRecord.BLANK);
+                if (offHandActive && !Helpers.getItem(BloodFiberDevice.class, player).equals(offHand)) {
+                    cancel = true;
+                }
+                if (!cancel) {
+                    for (ItemStack stack : player.getInventory().items) {
+                        if (!stack.isEmpty() && stack.getItem() instanceof BloodFiberDevice) {
+                            boolean anotherActive = !stack.get(ModComponents.TOOL_RECORD).equals(ToolRecord.BLANK);
+                            if (anotherActive && !Helpers.getItem(BloodFiberDevice.class, player).equals(stack)) {
+                                cancel = true;
+                                break;
+                            }
+                        }
+                    }
+                }
+
+                if (cancel) {
+                    if (player.level().isClientSide()) {
+                        player.sendSystemMessage(Component.translatable("message." + BloodFiber.MODID + ".can't_use"));
+                    }
+                } else {
+                    while (device_key.consumeClick() && isHoldingDevice) {
+                        if (Minecraft.getInstance().screen == null) {
+                            Minecraft.getInstance().setScreen(new DeviceRadialMenu(Helpers.getItem(BloodFiberDevice.class, player), player));
+                            //PacketDistributor.sendToServer(new ServerOpenDeviceRadialMenu.Data(0));
+                        }
                     }
                 }
             }

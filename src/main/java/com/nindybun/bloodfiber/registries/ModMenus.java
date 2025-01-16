@@ -1,7 +1,7 @@
 package com.nindybun.bloodfiber.registries;
 
 import com.nindybun.bloodfiber.BloodFiber;
-import com.nindybun.bloodfiber.screens.menus.DeviceBindingMenu;
+import com.nindybun.bloodfiber.menus.DeviceBindingMenu;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.world.inventory.MenuType;
 import net.neoforged.bus.api.IEventBus;
